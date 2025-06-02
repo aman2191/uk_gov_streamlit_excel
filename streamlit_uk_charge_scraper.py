@@ -44,6 +44,8 @@ current_date = datetime.now().strftime("%Y-%m-%d")
 current_time = datetime.now().strftime("%H-%M-%S")
 DOWNLOAD_DIR = os.path.join(os.getcwd(), "PDF_FILES", current_date)
 BASE_DIR = os.path.join(os.getcwd(), "REPORTS", current_date)
+print("####--DOWNLOAD_DIR--##########################################", DOWNLOAD_DIR)
+print("####--DOWNLOAD_DIR--##########################################", BASE_DIR)
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 os.makedirs(BASE_DIR, exist_ok=True)
 
