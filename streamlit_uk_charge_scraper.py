@@ -10,7 +10,7 @@ from datetime import datetime
 from io import BytesIO
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+# from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -170,7 +170,7 @@ def get_company_info(company_name, persons_entitled, brief_description, input_da
     # options.add_argument("--headless=new")
     # options.add_argument("--start-maximized")
     # driver = webdriver.Chrome(service=service, options=options)
-    
+
     chrome_driver_path = os.path.join(os.getcwd(), "chromedriver")
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')
