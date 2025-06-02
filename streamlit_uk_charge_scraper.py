@@ -398,14 +398,14 @@ if st.session_state.report_generated:
     st.success("Processing completed!")
     report_path = generate_summary_file()
     
-    if report_path:
-        with open(report_path, "rb") as f:
-            st.download_button(
-                label="Download Summary Report",
-                data=f,
-                file_name="processing_summary.xlsx",
-                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            )
+    # if report_path:
+    #     with open(report_path, "rb") as f:
+    #         st.download_button(
+    #             label="Download Summary Report",
+    #             data=f,
+    #             file_name="processing_summary.xlsx",
+    #             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    #         )
 
 st.markdown("---")
 st.header("📁 Download All Files")
