@@ -2,3 +2,4 @@ streamlit
 selenium
 PyPDF2
 requests
+openpyxl
