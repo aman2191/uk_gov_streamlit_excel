@@ -155,7 +155,7 @@ def save_pdf_file(pdf_content, filename, date_info):
     full_path = os.path.join(DOWNLOAD_DIR, safe_filename)
     with open(full_path, "wb") as f:
         f.write(pdf_content.getvalue())
-    add_log_message(f"💾 Saved PDF: {safe_filename}")
+    add_log_message(f"💾 Saved PDF: {safe_filename}, full path: {full_path}")
     time.sleep(1)
     return full_path
 
