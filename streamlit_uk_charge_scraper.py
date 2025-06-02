@@ -16,6 +16,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import (NoSuchElementException, TimeoutException, ElementClickInterceptedException)
 from difflib import SequenceMatcher
 import PyPDF2
+import zipfile
+from pathlib import Path
 
 # Initialize session state
 if 'processing' not in st.session_state:
@@ -42,6 +44,26 @@ DOWNLOAD_DIR = os.path.join(os.getcwd(), "PDF_FILES", current_date)
 BASE_DIR = os.path.join(os.getcwd(), "REPORTS", current_date)
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 os.makedirs(BASE_DIR, exist_ok=True)
+
+def zip_folders_and_provide_download():
+    zip_filename = f"Download_{current_date}_{current_time}.zip"
+    zip_path = os.path.join(os.getcwd(), zip_filename)
+
+    # Create a zip file containing both folders
+    with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+        for folder in [DOWNLOAD_DIR, BASE_DIR]:
+            folder_path = Path(folder)
+            for file_path in folder_path.rglob('*'):
+                zipf.write(file_path, arcname=file_path.relative_to(folder_path.parent))
+
+    # Provide the download button
+    with open(zip_path, "rb") as f:
+        st.download_button(
+            label="📦 Download All (PDF_FILES + REPORTS)",
+            data=f,
+            file_name=zip_filename,
+            mime="application/zip"
+        )
 
 # Helper functions
 def log_result(company_name, input_date, status, reason="", downloaded_pdf_name=""):
@@ -384,3 +406,7 @@ if st.session_state.report_generated:
                 file_name="processing_summary.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
+st.markdown("---")
+st.header("📁 Download All Files")
+zip_folders_and_provide_download()
